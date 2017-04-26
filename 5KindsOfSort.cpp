@@ -1,5 +1,5 @@
 /*
-插入排序：
+（1）插入排序：
 对于一个int数组，请编写一个插入排序算法，对数组元素排序。
 给定一个int数组A及数组的大小n，请返回排序后的数组。
 测试样例：
@@ -42,3 +42,57 @@ public:
         return A;
     }
 };
+
+/*
+（2）归并排序算法：
+对于一个int数组，请编写一个归并排序算法，对数组元素排序。
+给定一个int数组A及数组的大小n，请返回排序后的数组。
+测试样例：
+[1,2,3,5,2,3],6
+[1,2,2,3,3,5]
+*/
+
+class MergeSort {
+public:
+    void merge(int* a,int start,int end,int* temp){
+        if(start < end){
+            int middle = (start + end)>>1;  //二进制右移一位，即是除2
+            merge(a,start,middle,temp);
+            merge(a,middle+1,end,temp);
+            merge_sort(a,start,middle,end,temp);
+        }
+    };
+    void merge_sort(int* a,int start,int middle,int end,int* temp){
+        int i=start;
+        int j=middle+1;
+        int k = start;
+        while(i<=middle && j<= end){
+            if(a[i]<a[j])
+                temp[k++] = a[i++];
+            else
+                temp[k++] = a[j++];
+        }
+        while(i <= middle){
+            temp[k++]=a[i++];
+        }
+        while(j <= end){
+            temp[k++] = a[j++];
+        }
+        for(int i=start;i<=end;++i){
+            a[i] = temp[i];
+        }
+    };
+    int* mergeSort(int* A, int n) {
+        // write code here
+        if(n<=1)
+            return A;
+        int* temp = new int[n];  //申请临时数组用于保存每次递归排序后的值
+        int* a = A;
+        merge(a,0,n-1,temp);
+        
+        delete[] temp;
+        return a;
+    }
+};
+
+
