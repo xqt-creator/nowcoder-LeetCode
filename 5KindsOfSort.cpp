@@ -125,7 +125,7 @@ public:
                 l++;
             if (l < r) A[r--] = A[l];    //此时A[l]>target,将a[l]的值赋值给a[r],然后r--
         }
-        A[l] = target;
+        A[l] = target;   // 最后l，r的位置的值就是轴值所在的值target
         return l;
     }
     int* quickSort(int* A, int n) {
