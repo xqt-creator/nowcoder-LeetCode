@@ -117,13 +117,13 @@ public:
     int partition(int* A,int start,int end){    
         int target = A[start];
         int l = start,r = end;
-        while(l < r){
-            while (l < r && A[r] >= target)
+        while(l < r){         //如果右边的值比轴值大就循环
+            while (l < r && A[r] >= target)   
                 r--;
-            if (l < r) A[l++] = A[r];
+            if (l < r) A[l++] = A[r];   //此时A[r]<target，将a[r]的值赋值给a[l],然后l++
             while (l < r && A[l] <= target)
                 l++;
-            if (l < r) A[r--] = A[l];
+            if (l < r) A[r--] = A[l];    //此时A[l]>target,将a[l]的值赋值给a[r],然后r--
         }
         A[l] = target;
         return l;
